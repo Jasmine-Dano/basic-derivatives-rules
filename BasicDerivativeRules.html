@@ -51,6 +51,38 @@
             position: relative;
         }
 
+        /* Back to Main Page Button */
+        .back-to-main {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--warning), #e85d04);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+            z-index: 1000;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .back-to-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
+            background: linear-gradient(135deg, #e85d04, var(--warning));
+        }
+
+        .back-to-main:active {
+            transform: translateY(0);
+        }
+
         /* Header Styles */
         header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
@@ -525,6 +557,14 @@
                 height: 60px;
                 font-size: 1.5rem;
             }
+            
+            /* Adjust back button for mobile */
+            .back-to-main {
+                top: 10px;
+                left: 10px;
+                padding: 10px 18px;
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -546,6 +586,11 @@
             
             .rule-title {
                 font-size: 1.3rem;
+            }
+            
+            .back-to-main {
+                padding: 8px 16px;
+                font-size: 0.75rem;
             }
         }
 
@@ -571,6 +616,11 @@
     </style>
 </head>
 <body>
+    <!-- Back to Main Page Button -->
+    <button class="back-to-main" onclick="goToMainPage()">
+        <i class="fas fa-arrow-left"></i> Main Page
+    </button>
+
     <div class="container">
         <header>
             <h1><i class="fas fa-calculator"></i> Derivative Pro</h1>
@@ -695,6 +745,26 @@
     </div>
 
     <script>
+        // Function to go back to main page
+        function goToMainPage() {
+    const githubPagesURL = 'https://mo-rale.github.io/mathmasterpro/';
+    const localPath = '/index.html';
+    
+    try {
+        if (window.location.hostname === 'localhost' || 
+            window.location.hostname === '127.0.0.1' ||
+            window.location.protocol === 'file:') {
+            window.location.href = localPath;
+        } else {
+            window.location.href = githubPagesURL;
+        }
+    } catch (error) {
+        console.error('Navigation error:', error);
+        // Fallback to local path
+        window.location.href = localPath;
+    }
+}
+
         // Tab switching functionality
         document.querySelectorAll('.tab-button').forEach(button => {
             button.addEventListener('click', () => {
